@@ -12,7 +12,7 @@ public class SwapiServiceClient {
 
     public static SwapiService createSwapiService() {
         swapiService = new Retrofit.Builder()
-                .baseUrl("https://swapi.dev/api/")
+                .baseUrl("http://localhost:8083/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(SwapiService.class);
         return swapiService;

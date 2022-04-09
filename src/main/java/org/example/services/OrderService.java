@@ -12,8 +12,8 @@ import java.io.IOException;
 public class OrderService {
     private static SwapiServiceClient.SwapiService swapiService = SwapiServiceClient.createSwapiService();
     public OrderResponse createOrder(OrderRequest orderRequest) throws IOException {
-        if(orderRequest.getPeopleId().equals(4L)) throw new RuntimeException("Darth Vader cannot create an order.");
         PeopleResponse peopleResponse = swapiService.getPeople(orderRequest.getPeopleId()).execute().body();
-        return new OrderResponse(1L, peopleResponse, orderRequest.getOrderName(), orderRequest.getOrderDescription());
+        if(peopleResponse.getName().equals("Darth Vader")) throw new RuntimeException("Darth Vader cannot create an order.");
+        return new OrderResponse(1L, orderRequest.getPeopleId() ,peopleResponse, orderRequest.getOrderName(), orderRequest.getOrderDescription());
     }
 }
